@@ -221,3 +221,30 @@ def delete_donor(selected_donor):
 
 #----------------------------------------------------------------------------------------------
 
+#Calculates amount donated to each chaity type
+def calculate_amount_donated_to_type(charity_type):
+    charity_type_info = Charity_Type.find_by_category(charity_type)
+    donations = []
+    if charity_type_info:
+        category_id = charity_type_info.id
+        donor_info = Donor.find_by_charity_type_id(category_id)
+        if donor_info:
+            for donor in donor_info:
+                donations.append(donor.amount_donated)
+        print(f"          So far {charity_type} Charities have received £{sum(donations)} from this app")
+    else:
+        print(f"{charity_type} does not exist")
+
+#Calculates amount donated to each charity
+def calculate_amount_donated_to_charity(charity_name):
+    charity_info = Charity.find_by_name(charity_name)
+    donations = []
+    if charity_info:
+        charity_id = charity_info.id 
+        donor_info = Donor.find_by_charity_id(charity_id)
+        if donor_info:
+            for donor in donor_info:
+                donations.append(donor.amount_donated)
+        print(f"                So far {charity_name} has raised £{sum(donations)} from this app.")
+    else:
+        print(f"{charity_name} does not exist on this app")
