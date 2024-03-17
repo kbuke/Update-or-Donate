@@ -1,7 +1,7 @@
 # lib/helpers.py
 from models.charity_type import Charity_Type
 from models.charity import Charity
-from models.donator import Donator
+from models.donor import Donor
 
 def exit_program():
     print("Goodbye!")
