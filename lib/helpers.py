@@ -7,6 +7,8 @@ def exit_program():
     print("Goodbye!")
     exit()
 
+#----------------------------------------------------------------------------------------------
+
 #Check charity types exist
 def check_charity_type(user_input):
     if Charity_Type.find_by_category(user_input):
@@ -30,5 +32,29 @@ def check_donor(user_input):
 
 #----------------------------------------------------------------------------------------------
 
+#Show all available charity types
+def show_all_charity_types():
+    charity_types = Charity_Type.get_all()
+    print("")
+    print("-----------------------------------------------------------------------")
+    for count, charity_type in enumerate(charity_types):
+        print(f"                              {count + 1} -> {charity_type}")
+        print("-----------------------------------------------------------------------")
 
+#Show all available charities
+def show_all_charities():
+    charities = Charity.get_all()
+    print("-----------------------------------------------------------------------")
+    for count, charity in enumerate(charities):
+        print(f"           {count + 1} -> {charity}")
+        print("-----------------------------------------------------------------------")
+
+#Show all donors
+def show_all_donors():
+    donors = Donor.get_all()
+    print("The following donors have donated on this app:")
+    for count, donor in enumerate(donors):
+        print(f"{count + 1} -> {donor}")
+
+#----------------------------------------------------------------------------------------------
 
