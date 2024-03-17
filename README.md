@@ -1,4 +1,32 @@
-# Phase 3 CLI+ORM Project Template
+# Phase 3 CLI+ORM Project - Charity-Gram
+
+## Introduction
+Welcome to my end of Phase 3 project for FlatIron school. 
+The idea I had was to combine my professional life of working/volunteering with NGO's with my educational life of coding.
+I wanted to create a CLI that adheres to an everyday web user and show them "client facing" information
+
+I chose to focus on three categories:
+    (1) -> Charity Categories, such as food, environment e.t.c.
+    (2) -> Charities, such as Unicef (as well as what categories they fell under)
+    (3) -> Donors, and who they donated to
+Each instance of these categories/classes can be updated or deleted.
+In addition we can add new instances to each class/category thanks to the __init__ methods in all classes.
+
+Please when using this app, run the commands:
+```console
+pipenv install
+pipenv shell
+```
+
+## cli.py
+This file is where the Command Line Interface(CLI) is run.
+The CLI is a text-based interface where you can input commands that interact with a computer's operating system.
+All menus and inputs the user interacts with in this app have been created using this page. 
+To access it from the console please enter:
+```
+$python lib/cli.py
+```
+
 
 ## Learning Goals
 
