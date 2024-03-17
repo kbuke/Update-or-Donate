@@ -58,3 +58,57 @@ def show_all_donors():
 
 #----------------------------------------------------------------------------------------------
 
+#Update charity types
+def update_charity_type(charity_type):
+    if charity_type := Charity_Type.find_by_category(charity_type):
+        try:
+            new_charity_type = input("Enter UPDATED charity type: ")
+            charity_type.category = new_charity_type
+            charity_type.update()
+            print(f"Success! {charity_type} has been updated to {new_charity_type}")
+        except Exception as exc:
+            print(f"Error updating {charity_type}", exc)
+    else:
+        print(f"{charity_type} is not a registered charity category on this app")
+
+
+#Update charities
+def update_charity(charity):
+    if charity_info := Charity.find_by_name(charity):
+        try:
+            update_name = input("Enter updated name: ")
+            charity_info.name = update_name
+            update_location = input("Enter updated location: ")
+            charity_info.location = update_location
+            updated_category = input("Enter the updated charity category: ")
+            charity_type_info = Charity_Type.find_by_category(updated_category)
+            if charity_type_info:
+                updated_type_id = charity_type_info.id
+                charity_info.charity_type_id = updated_type_id
+                charity_info.update()
+        except Exception as exc:
+            print(f"Error updating {charity}", exc)
+  
+
+#Update donors donation to specific charity
+def update_donation_to_chosen_charity(donate_name, charity):
+    if donor_info := Donor.find_by_name(donate_name):
+        try:
+            update_name = input("Enter updated name: ")
+            donor_info.name = update_name
+            update_location = input("Enter updated location: ")
+            donor_info.location = update_location
+            update_donate = input("Enter updated donation: £")
+            donor_info.amount_donated = float(update_donate)
+            charity_info = Charity.find_by_name(charity)
+            if charity_info:
+                donor_info.charity_id = charity_info.id
+                donor_info.charity_type_id = charity_info.charity_type_id
+                donor_info.update()
+        except Exception as exc:
+            print(f"Error updating {donate_name}'s donation", exc)
+    else:
+        print(f"{donate_name} has not made a donation to {charity}")
+
+#----------------------------------------------------------------------------------------------
+
