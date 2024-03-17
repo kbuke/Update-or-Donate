@@ -147,3 +147,47 @@ def show_certain_donors(selected_charity):
     else:
         print(f"{selected_charity} is not a registered charity on this app")
 
+#----------------------------------------------------------------------------------------------
+
+#Add a new charity type to database
+def add_new_charity_type(new_type):
+    if not check_charity_type(new_type):
+        Charity_Type.category = new_type
+        Charity_Type.create(new_type)
+        print("")
+        print(f"Adding {new_type} to the apps database")
+        print("")
+        print(f"{new_type} has been added to the list of available charity types")
+    else:
+        print(f"{new_type} Category is already registered on this apps database")
+
+#Add a new charity to database
+def add_new_charity(new_charity_type):
+    charity_type_info = Charity_Type.find_by_category(new_charity_type)
+    if charity_type_info:
+        new_name = input("Enter the name of your charity: ")
+        new_location = input("Enter the location of your charity: ")
+        new_type = charity_type_info.id
+        Charity.create(new_name, new_location, new_type)
+    else:
+        print(f"{new_charity_type} is not a registered charity type on this app")
+    
+
+#Add a new donor to the database
+def add_new_donor(new_donation):
+    charity_info = Charity.find_by_name(new_donation)
+    if charity_info:
+        print(charity_info.charity_type_id)
+        new_name = input("Enter your name: ")
+        new_location = input("Enter your location: ")
+        new_donation = input("Enter the amount to donate: £")
+        new_charity_id = charity_info.id
+        new_charity_type_id = charity_info.charity_type_id
+        Donor.create(new_name, new_location, float(new_donation), new_charity_id, new_charity_type_id)
+    else:
+        print(f"{new_donation} is not a registered charity on this app")
+
+#----------------------------------------------------------------------------------------------
+
+
+
