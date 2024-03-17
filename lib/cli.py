@@ -46,5 +46,12 @@ def menu():
     print("")
     print("                    (0) -> To view exit the application")
 
+def b_0(prev_page="Home"):
+    print("                                    OR Press")
+    print("")
+    print(f"                   (B) -> To go back to {prev_page} Menu")
+    print("")
+    print("                             (0) -> To exit app")
+
 if __name__ == "__main__":
     main()
