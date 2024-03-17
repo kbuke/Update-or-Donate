@@ -16,7 +16,17 @@ def main():
 
 
 def menu():
-    pass
+    print("          ____________________________________________________________")
+    print("          --------------------------Home Menu-------------------------")
+    print("          ____________________________________________________________")
+    print("")
+    print("                                     Press:")
+    print("")
+    print("             (A) -> To view all available charity types on the app")
+    print("")
+    print("               (B) -> To view all available charities on this app")
+    print("")
+    print("                    (0) -> To view exit the application")
 
 if __name__ == "__main__":
     main()
