@@ -189,5 +189,35 @@ def add_new_donor(new_donation):
 
 #----------------------------------------------------------------------------------------------
 
+#Delete existing charity type
+def delete_charity_type(selected_type):
+    charity_type_info = Charity_Type.find_by_category(selected_type)
+    if charity_type_info:
+        charity_type_info.delete()
+        print("")
+        print(f"{selected_type} has been removed from categories")
+    else:
+        print(f"{selected_type} is not a registered category on this app")
 
+#Delete charity
+def delete_charity(selected_charity):
+    charity_info = Charity.find_by_name(selected_charity)
+    if charity_info:
+        charity_info.delete()
+        print("")
+        print(f"{selected_charity} has been removed from charity database")
+    else:
+        print(f"{selected_charity} is not a registered charity on this app")
+
+#Delete donor
+def delete_donor(selected_donor):
+    donor_info = Donor.find_by_name(selected_donor)
+    if donor_info:
+        donor_info.delete()
+        print("")
+        print(f"{selected_donor} has been removed from donor list")
+    else:
+        print(f"{selected_donor} has not yet made a donation")
+
+#----------------------------------------------------------------------------------------------
 
