@@ -1,4 +1,5 @@
 from models.__init__ import CONN, CURSOR
+from models.charity_type import Charity_Type
 
 class Charity:
     
@@ -167,4 +168,3 @@ class Charity:
             return [cls.instance_from_db(row) for row in rows]
         else:
             return None
-    

@@ -4,6 +4,7 @@
 from models.__init__ import CONN, CURSOR
 from models.donor import Donor
 from models.charity import Charity
+from models.charity_type import Charity_Type
 import ipdb
 
 def reset_database():
@@ -12,6 +13,9 @@ def reset_database():
 
     Charity.drop_table()
     Charity.create_table()
+
+    Charity_Type.drop_table()
+    Charity_Type.create_table()
 
 
 

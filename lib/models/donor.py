@@ -1,6 +1,9 @@
 from models.__init__ import CONN, CURSOR
+from models.charity import Charity
+from models.charity_type import Charity_Type
 
-    
+
+
 class Donor:
 
     all = {}
@@ -10,7 +13,7 @@ class Donor:
         self.location = location
         self.amount_donated = amount_donated
         self.charity_id = charity_id
-        self.charity_type_id = charity_type_id 
+        self.charity_type_id = charity_type_id
     
     def __repr__(self):
         charity_name = Charity.find_by_id(self.charity_id).name if self.charity_id in Charity.all else ""
@@ -168,6 +171,45 @@ class Donor:
             WHERE id = ?
         """
         row = CURSOR.execute(sql, (id,)).fetchone()
+        if row:
+            return cls.instance_from_db(row)
+        else:
+            return None
+    
+    @classmethod
+    def find_by_charity_id(cls, charity_id):
+        sql = """
+            SELECT *
+            From donors
+            WHERE charity_id = ?
+        """
+        rows = CURSOR.execute(sql, (charity_id,)).fetchall()
+        if rows:
+            return [cls.instance_from_db(row) for row in rows]
+        else:
+            return None
+    
+    @classmethod
+    def find_by_charity_type_id(cls, charity_type_id):
+        sql = """
+            SELECT *
+            FROM donors
+            WHERE charity_type_id = ?
+        """
+        rows = CURSOR.execute(sql, (charity_type_id,)).fetchall()
+        if rows:
+            return [cls.instance_from_db(row) for row in rows]
+        else:
+            return None
+    
+    @classmethod
+    def find_by_name(cls, name):
+        sql = """
+            SELECT *
+            FROM donors
+            WHERE name = ?
+        """
+        row = CURSOR.execute(sql,(name,)).fetchone()
         if row:
             return cls.instance_from_db(row)
         else:
