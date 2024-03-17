@@ -12,7 +12,7 @@ class Donor:
         self.charity_id = charity_id
         self.charity_type_id = charity_type_id 
     
-     def __repr__(self):
+    def __repr__(self):
         charity_name = Charity.find_by_id(self.charity_id).name if self.charity_id in Charity.all else ""
         return f"{self.name} from {self.location} has donated £{self.amount_donated} to {charity_name}!"
     
