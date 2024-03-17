@@ -46,6 +46,26 @@ def menu():
     print("")
     print("                    (0) -> To view exit the application")
 
+def charity_type_menu():
+    prev_page = "Home"
+    print("          ____________________________________________________________")
+    print("          ---------------------Charity Types Menu---------------------")
+    print("          ____________________________________________________________")
+    print("")
+    print("               We have the available charity types on this app:")
+    show_all_charity_types()
+    print("          Enter the charity CATEGORY to see more information about it")
+    print("")
+    print("                                    OR Press")
+    print("")
+    print("                (A) -> To add a NEW charity type to the app")
+    print("")
+    print("              (R) -> To remove a current charity type from app")
+    print("")
+    print("____________________________________________________________")
+    b_0(prev_page)
+    print("____________________________________________________________")
+
 def b_0(prev_page="Home"):
     print("                                    OR Press")
     print("")
