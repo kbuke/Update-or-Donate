@@ -115,6 +115,27 @@ def charity_menu():
     b_0()
     print("____________________________________________________________")
 
+def specific_charity_menu(charity_name, prev_page):
+    print("          ____________________________________________________________")
+    print(f"         --------------------{charity_name} Menu--------------------")
+    print("          ____________________________________________________________")
+    print("")
+    calculate_amount_donated_to_charity(charity_name)
+    print("")
+    show_certain_donors(charity_name)
+    print("")
+    print("                                PRESS:")
+    print("")
+    print(f"              (A) -> To add a donation to {charity_name}            ")
+    print("")
+    print(f"           (U) -> Update an existing donation to {charity_name}     ")
+    print("")
+    print(f"              (D) -> To delete a donation to {charity_name}")
+    print("")
+    print("____________________________________________________________")
+    b_0(prev_page)
+    print("____________________________________________________________")
+
 def b_0(prev_page="Home"):
     print("                                    OR Press")
     print("")
