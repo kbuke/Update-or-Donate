@@ -112,3 +112,38 @@ def update_donation_to_chosen_charity(donate_name, charity):
 
 #----------------------------------------------------------------------------------------------
 
+#Show all charities of a chosen type
+def show_charities_of_certain_type(selected_charity_type):
+    charity_type_info = Charity_Type.find_by_category(selected_charity_type)
+    if charity_type_info:
+        charity_type_id = charity_type_info.id 
+        charities_info = Charity.find_by_charity_type_id(charity_type_id)
+        if charities_info:
+            print(f"               The following charities are {selected_charity_type} charities:")
+            print("")
+            print("---------------------------------------------------------------------------------------------------")
+            for count, charity_info in enumerate(charities_info):
+                print(f"                     {count + 1} -> {charity_info}")
+                print("---------------------------------------------------------------------------------------------------")
+        else:
+            print(f"               {selected_charity_type} has no registered charities yet")
+    else:
+        print(f"               {selected_charity_type} is not a registered category on this app")
+
+#Show all donors to a certain charity
+def show_certain_donors(selected_charity):
+    charity_info = Charity.find_by_name(selected_charity)
+    if charity_info:
+        charity_id = charity_info.id
+        donors_info = Donor.find_by_charity_id(charity_id)
+        if donors_info:
+            print(f"                 The following have donated to {selected_charity}:")
+            print("-----------------------------------------------------------------------")
+            for count, donor_info in enumerate(donors_info):
+                print(f"          {count + 1} -> {donor_info}")
+                print("-----------------------------------------------------------------------")
+        else:
+            print(f"{selected_charity} has received no donations yet")
+    else:
+        print(f"{selected_charity} is not a registered charity on this app")
+
