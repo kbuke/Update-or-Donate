@@ -23,178 +23,39 @@ This file is where the Command Line Interface(CLI) is run.
 The CLI is a text-based interface where you can input commands that interact with a computer's operating system.
 All menus and inputs the user interacts with in this app have been created using this page. 
 To access it from the console please enter:
-```
+```console
 $python lib/cli.py
 ```
+With the help of "helper functions" I have been able to create code that allows for easy navigation through the CLI in the users terminal. It creates all the menus the user sees, highlighting which options they can choose which is implemented by the helper functions.
 
+## helpers.py
+This file holds all the code that forms the backbone of the CLI.
+The code written here allows users to update, delete and create new instances of each class, and thanks to the ORM methods in each classes function it will update the tables in our database. 
+The functions created in this file are imported to the cli.py file so they can work in unison to create easy navigation for the user.
 
-## Learning Goals
-
-- Discuss the basic directory structure of a CLI.
-- Outline the first steps in building a CLI.
-
----
-
-## Introduction
-
-You now have a basic idea of what constitutes a CLI. Fork and clone this lesson
-for a project template for your CLI.
-
-Take a look at the directory structure:
-
+## debug.py
+This file handles the creation and deletion of our database. 
+To access it you must enter:
 ```console
-.
-├── Pipfile
-├── Pipfile.lock
-├── README.md
-└── lib
-    ├── models
-    │   ├── __init__.py
-    │   └── model_1.py
-    ├── cli.py
-    ├── debug.py
-    └── helpers.py
+$python lib/debug.py
 ```
+This will check to see if a table exists for each class, if it does delete it, and create it again to its default standard.
+In addition I have also included some seeded data to fill the table upon initialization.
+This data can be altered or deleted, but when you call $python li/debug.py again they shall be brought back
 
-Note: The directory also includes two files named `CONTRIBUTING.md` and
-`LICENSE.md` that are specific to Flatiron's curriculum. You can disregard or
-delete the files if you want.
+## __init__.py
+This file contains a connection to the database (via CONN variable), and allow us to interact with database and execute SQL respectively(via CURSOR variable). 
 
----
+## charity_type.py
+This file contais the class Charity_Type, and via the __init__ method allows us to create instances of the Charity_Type class
+It contains other methods that adhere to ORM methods (all written in SQL) that help access relational data such as allowing us to create and drop the corresponding table, and update, delete and add instances to the  class.
+To adhere to the rule of Single Source of Truth the Charity_Type class holds methods that store the relationship between it and the Charity class, as well as it and the Donor class
 
-## Generating Your Environment
+## charity.py
+This file contains the class Charity, and via the __init__ method allows us to create instances of the Charity class.
+It contains other methods that adhere to ORM methods (all written in SQL) that help access relational data such as allowing us to create and drop the corresponding table, and update, delete and add instances to the  class.
+To adhere to the rule of Single Source of Truth the Charity class holds methods that store the relationship between it and the Donor class.
 
-You might have noticed in the file structure- there's already a Pipfile!
-
-Install any additional dependencies you know you'll need for your project by
-adding them to the `Pipfile`. Then run the commands:
-
-```console
-pipenv install
-pipenv shell
-```
-
----
-
-## Generating Your CLI
-
-A CLI is, simply put, an interactive script and prompts the user and performs
-operations based on user input.
-
-The project template has a sample CLI in `lib/cli.py` that looks like this:
-
-```py
-# lib/cli.py
-
-from helpers import (
-    exit_program,
-    helper_1
-)
-
-
-def main():
-    while True:
-        menu()
-        choice = input("> ")
-        if choice == "0":
-            exit_program()
-        elif choice == "1":
-            helper_1()
-        else:
-            print("Invalid choice")
-
-
-def menu():
-    print("Please select an option:")
-    print("0. Exit the program")
-    print("1. Some useful function")
-
-
-if __name__ == "__main__":
-    main()
-```
-
-The helper functions are located in `lib/helpers.py`:
-
-```py
-# lib/helpers.py
-
-def helper_1():
-    print("Performing useful function#1.")
-
-
-def exit_program():
-    print("Goodbye!")
-    exit()
-```
-
-You can run the template CLI with `python lib/cli.py`, or include the shebang
-and make it executable with `chmod +x`. The template CLI will ask for input, do
-some work, and accomplish some sort of task.
-
-Past that, CLIs can be whatever you'd like, as long as you follow the project
-requirements.
-
-Of course, you will update `lib/cli.py` with prompts that are appropriate for
-your application, and you will update `lib/helpers.py` to replace `helper_1()`
-with a useful function based on the specific problem domain you decide to
-implement, along with adding other helper functions to the module.
-
-In the `lib/models` folder, you should rename `model_1.py` with the name of a
-data model class from your specific problem domain, and add other classes to the
-folder as needed. The file `lib/models/__init__.py` has been initialized to
-create the necessary database constants. You need to add import statements to
-the various data model classes in order to use the database constants.
-
-You are also welcome to implement a different module and directory structure.
-However, your project should be well organized, modular, and follow the design
-principal of separation of concerns, which means you should separate code
-related to:
-
-- User interface
-- Data persistence
-- Problem domain rules and logic
-
----
-
-## Updating README.md
-
-`README.md` is a Markdown file that should describe your project. You will
-replace the contents of this `README.md` file with a description of **your**
-actual project.
-
-Markdown is not a language that we cover in Flatiron's Software Engineering
-curriculum, but it's not a particularly difficult language to learn (if you've
-ever left a comment on Reddit, you might already know the basics). Refer to the
-cheat sheet in this assignments's resources for a basic guide to Markdown.
-
-### What Goes into a README?
-
-This README serves as a template. Replace the contents of this file to describe
-the important files in your project and describe what they do. Each Python file
-that you edit should get at least a paragraph, and each function should be
-described with a sentence or two.
-
-Describe your actual CLI script first, and with a good level of detail. The rest
-should be ordered by importance to the user. (Probably functions next, then
-models.)
-
-Screenshots and links to resources that you used throughout are also useful to
-users and collaborators, but a little more syntactically complicated. Only add
-these in if you're feeling comfortable with Markdown.
-
----
-
-## Conclusion
-
-A lot of work goes into a good CLI, but it all relies on concepts that you've
-practiced quite a bit by now. Hopefully this template and guide will get you off
-to a good start with your Phase 3 Project.
-
-Happy coding!
-
----
-
-## Resources
-
-- [Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/)
+## donor.py
+This file contains the class Donor, and via the __init__ method allows us to create instances of the Donor class.
+It contains other methods that adhere to ORM methods (all written in SQL) that help access relational data such as allowing us to create and drop the corresponding table, and update, delete and add instances to the  class.
